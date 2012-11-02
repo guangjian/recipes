@@ -1,8 +1,6 @@
 recipes
 =======
 
-A place for recipes of all types and uses for the CIC
-
 Cloudify Recipes for CIC-related projects.
 
 Folder structure:
