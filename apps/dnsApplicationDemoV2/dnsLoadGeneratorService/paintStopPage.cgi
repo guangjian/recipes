@@ -37,9 +37,9 @@ if num_slaves < 2:
     <tr>
     <td>
     <form name="stopload" action="/cgi-bin/stopload.cgi" method="get">
-    DNS Slave service scale-out in progress ...
+    DNS Slave service scaleing in progress ...
     <br>
-    <input type="submit" value="Abort Demo">
+    <input type="submit" value="Reset Demo">
     </form>
     </td>
     </tr>'''
