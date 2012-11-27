@@ -65,7 +65,7 @@ def installWindowsMysql(config,osConfig,unzipDir,zipFullPath,builder,myCnfObject
 	}
 }
 
-def getCnfObject(config,context,isMaster,isSlave) {
+def getCnfObject(config,context) {
 
 	def sectionNames = ""
 	def variableNames = "" 
@@ -147,7 +147,7 @@ println "mysql_install.groovy: dbPort is ${config.jdbcPort}"
 
 context.attributes.thisInstance["postStartRequired"] = true
 
-def myCnfObject = getCnfObject(config,context,isMaster,isSlave)
+def myCnfObject = getCnfObject(config,context)
 
 builder = new AntBuilder()
 
