@@ -80,27 +80,6 @@ def getCnfObject(config,context,isMaster,isSlave) {
 	]
 	
 	
-	if ( config.masterSlaveMode ) {
-		println "mysql_install.groovy: getCnfObject: masterSlaveMode"
-			
-		if ( isMaster ) {
-			println "mysql_install.groovy: getCnfObject: variables set #${varaiblesCounter} (server-id)"
-			sectionNames +="mysqld,"
-			variableNames +="server-id,"
-			newValues +="1,"	
-			++varaiblesCounter
-		}
-		else if ( isSlave ) {
-			// id 1 is for the master. So the slaves instances will start from id #2
-			println "mysql_install.groovy: getCnfObject: variables set #${varaiblesCounter} (server-id)"
-			def slaveServerID = context.getInstanceId()+1
-			sectionNames +="mysqld,"
-			variableNames +="server-id,"
-			newValues +="${slaveServerID},"
-			++varaiblesCounter
-		}
-	}
-	
 	def myCnfReplacements
 	if ( config.myCnfReplacements ) {
 		myCnfReplacements = config.myCnfReplacements
@@ -139,31 +118,7 @@ osConfig=ServiceUtils.isWindows() ? config.win64 : config.linux
 context = ServiceContextFactory.getServiceContext()
 def myInstanceID=context.getInstanceId()
 
-def isMaster=false
-def isSlave=false
-
-if ( config.masterSlaveMode ) {	
-	println "mysql_install.groovy: masterSlaveMode"
-	if ( myInstanceID == 1 ) {
-		println "mysql_install.groovy: I am a master b4 setting isMaster to true and isSlave to false..."
-		isMaster = true		
-		context.attributes.thisService["masterIsReady"]=false
-		context.attributes.thisService["masterID"]=myInstanceID
-		isSlave = false
-	}
-	else {
-		println "mysql_install.groovy: I am a slave(instance id ${myInstanceID}) b4 setting isSlave to true and isMaster to false..."
-		isMaster = false
-		isSlave = true		
-	}
-	
-	context.attributes.thisInstance["isSlave"]=isSlave
-	context.attributes.thisInstance["isMaster"]=isMaster		
-	
-}
-else {
-	println "mysql_install.groovy: Installing in a standalone mode"
-}
+println "mysql_install.groovy: Installing in a standalone mode"
 
 def mysqlHost
 
