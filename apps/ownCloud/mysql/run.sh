@@ -12,7 +12,7 @@ function error_exit {
 
 export PATH=$PATH:/usr/sbin:/sbin:/usr/bin || error_exit $? "Failed on: export PATH=$PATH:/usr/sbin:/sbin"
 
-sudo /etc/rc.d/init.d/mysqld start || error_exit $? "Failed on: sudo /etc/rc.d/init.d/mysqld start"
+/etc/rc.d/init.d/mysqld start || error_exit $? "Failed on: /etc/rc.d/init.d/mysqld start"
 
 ps -ef | grep -i mysql | grep -ivE "gigaspaces|GSC|GSA|grep"
 
