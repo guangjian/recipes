@@ -10,5 +10,5 @@ chkconfig nfs on
 # make a directory and make it available as an NFS directory
 mkdir /opt/owncloudshare
 chown -R apache:apache /opt/owncloudshare
-chmod 0770 /opt/owncloushare
+chmod 0770 /opt/owncloudshare
 echo "/opt/owncloudshare 135.0.0.0/8(rw,no_root_squash,sync)" >> /etc/exports
