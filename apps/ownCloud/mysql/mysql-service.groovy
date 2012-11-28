@@ -24,8 +24,6 @@ service {
 	type "DATABASE"
 	elastic true
 	numInstances 1
-	minAllowedInstances 1
-	maxAllowedInstances 3	
 	
 	compute {
 		template "SMALL_LINUX"
