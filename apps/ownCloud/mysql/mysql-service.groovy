@@ -36,7 +36,7 @@ service {
 		install "mysql_install.groovy"
 
 		start "mysql_start.groovy"
-		
+				
 		startDetectionTimeoutSecs 900
 		startDetection "mysql_startDetection.groovy"
 		

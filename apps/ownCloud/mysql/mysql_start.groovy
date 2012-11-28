@@ -61,7 +61,12 @@ def runPostStartActions(config,binFolder,osConfig,currOsName,builder,context,mys
 				currDumpPrefix = currActionObj["dumpPrefix"]
 				def dumpFolder = System.properties["user.home"]
 			    runMysqlDump(binFolder,osConfig.mysqldump,currOsName,currActionArgs,currActionDbName,currActionUser,currDebugMsg,dumpFolder,currDumpPrefix)							
-				break			  
+				break	
+			case "restoreDB":
+				def initialDbFile = currActionObj["dbBackupFile"]
+				def fullPathToImport="${context.serviceDirectory}/${initialDbFile}"
+				importMysqlDB(binFolder,osConfig.mysqlProgram,currOsName,fullPathToImport,currActionDbName,currActionUser,currDebugMsg,"dummy",false)
+				break
 			default:
 			  println "Ignoring Action Type ${currActionType} ... "
 			  break
