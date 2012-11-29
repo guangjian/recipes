@@ -37,7 +37,8 @@ Builder.sequential {
 		replaceregexp(file:"${context.serviceDirectory}/config.php",
 					match:"MYSQLSERVERIP",
 					replace:"$mysqlServerIP")		
-		copy(file:"${context.serviceDirectory}/config.php", tofile:"/var/www/html/owncloud/config/config.php")					
+		copy(file:"${context.serviceDirectory}/config.php", tofile:"/var/www/html/owncloud/config/config.php")
+		chmod(dir:"${context.serviceDirectory}", perm:"+x", includes:"*.sh")					
 		exec(executable:"${context.serviceDirectory}/start.sh",osfamily:"unix") {
 			arg value:"$nfsServerIP"
 			}
