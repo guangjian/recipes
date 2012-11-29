@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 context = ServiceContextFactory.getServiceContext()
 
 hostIp=InetAddress.localHost.hostAddress
-println "HostIP is: $hostIP"
+println "HostIP is: $hostIp"
 
 def mysqlService = context.waitForService("mysql", 300, TimeUnit.SECONDS)
 mysqlHostInstances = mysqlService.waitForInstances(mysqlService.numberOfPlannedInstances, 60, TimeUnit.SECONDS)
