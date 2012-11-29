@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 context = ServiceContextFactory.getServiceContext()
 
 hostIp=InetAddress.localHost.hostAddress
-println "HostIP is: $hostIP"
+println "HostIP is: $hostIp"
 
 def mysqlService = context.waitForService("mysql", 300, TimeUnit.SECONDS)
 mysqlHostInstances = mysqlService.waitForInstances(mysqlService.numberOfPlannedInstances, 60, TimeUnit.SECONDS)
@@ -20,8 +20,8 @@ if (mysqlServerIP == null) {
 
 println "Retrieving mySqlServerIP: $mysqlServerIP"
 
-def nfsService = context.waitForService("NFS", 300, TimeUnit.SECONDS)
-nfsHostInstances = nfsService.waitForInstances(nfsService.numberOfPlannedInstances, 300, TimeUnit.SECONDS)
+def nfsService = context.waitForService("nfsServer", 300, TimeUnit.SECONDS)
+nfsHostInstances = nfsService.waitForInstances(nfsService.numberOfPlannedInstances, 60, TimeUnit.SECONDS)
 
 nfsServerIP = nfsHostInstances[0].hostAddress
 if (nfsServerIP == null) {
@@ -37,9 +37,10 @@ Builder.sequential {
 		replaceregexp(file:"${context.serviceDirectory}/config.php",
 					match:"MYSQLSERVERIP",
 					replace:"$mysqlServerIP")		
-		copy(file:"${context.serviceDirectory}/config.php", tofile:"/var/www/html/owncloud/config/config.php")					
+		copy(file:"${context.serviceDirectory}/config.php", tofile:"/var/www/html/owncloud/config/config.php")
+		chmod(dir:"${context.serviceDirectory}", perm:"+x", includes:"*.sh")					
 		exec(executable:"${context.serviceDirectory}/start.sh",osfamily:"unix") {
-			arg value:"$NFSSERVERIP"
+			arg value:"$nfsServerIP"
 			}
 println "Finished attempting to copy config and execute start.sh"
 
