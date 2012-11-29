@@ -13,11 +13,6 @@ cp -r owncloud /var/www/html
 echo "Setting appropriate directory permissions"
 chown -R apache:apache /var/www
 
-mkdir /opt/ocStorage
-
-echo "135.109.205.25:/opt/owncloudshare /opt/ocStorage nfs rsize=8192,wsize=8192,timeo=14,rw" >> /etc/fstab
-
-mount -a
-
 echo "Restarting webserver service"
 service httpd restart
+
