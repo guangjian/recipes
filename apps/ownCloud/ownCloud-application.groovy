@@ -11,7 +11,7 @@ application {
 	}
 
 	service {
-		name = "ownClouFE"
+		name = "ownCloudFE"
 			dependsOn = ["mysql", "nfsServer" ]
 	}
 }
