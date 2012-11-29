@@ -26,7 +26,7 @@ service {
 	numInstances 1
 	
 	compute {
-		template "QUAD_ROOT_ACCESS"
+		template "BIG_MEDIUM"
 	}	
 	
 	lifecycle{
