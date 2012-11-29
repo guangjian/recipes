@@ -11,7 +11,7 @@ service {
 	numInstances 1	
 	
 	compute {
-		template "SMALL_LINUX"
+		template "QUAD_ROOT_ACCESS"
 	}	
 	
 	lifecycle{
