@@ -3,7 +3,7 @@ import groovy.sql.*
 
 service {
 	
-	name "NFS"
+	name "nfsServer"
 
 	
 	type "APP_SERVER"
