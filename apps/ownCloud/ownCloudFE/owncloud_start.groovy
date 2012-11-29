@@ -39,7 +39,7 @@ Builder.sequential {
 					replace:"$mysqlServerIP")		
 		copy(file:"${context.serviceDirectory}/config.php", tofile:"/var/www/html/owncloud/config/config.php")					
 		exec(executable:"${context.serviceDirectory}/start.sh",osfamily:"unix") {
-			arg value:"$NFSSERVERIP"
+			arg value:"$nfsServerIP"
 			}
 println "Finished attempting to copy config and execute start.sh"
 
