@@ -20,7 +20,7 @@ if (mysqlServerIP == null) {
 
 println "Retrieving mySqlServerIP: $mysqlServerIP"
 
-def nfsService = context.waitForService("NFS", 300, TimeUnit.SECONDS)
+def nfsService = context.waitForService("nfsServer", 300, TimeUnit.SECONDS)
 nfsHostInstances = nfsService.waitForInstances(nfsService.numberOfPlannedInstances, 300, TimeUnit.SECONDS)
 
 nfsServerIP = nfsHostInstances[0].hostAddress
