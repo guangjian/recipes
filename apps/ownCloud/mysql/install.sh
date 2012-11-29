@@ -5,7 +5,7 @@
 # $2 A command separated list of my.cnf variable names
 # $3 A command separated list of my.cnf values for the above variable names
 # 
-# 
+# test
 
 sectionNames=$1
 variableNames=$2
