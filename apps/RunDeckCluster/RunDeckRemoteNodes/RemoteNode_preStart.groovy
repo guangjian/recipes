@@ -45,7 +45,6 @@ Builder.sequential {
 Builder = new AntBuilder()
 Builder.sequential {
 	echo(message:"${num_planned_instances}", file:"/root/bin/num_remotenodes_wanted.txt", append:"false");
-	copy(file:"${context.serviceDirectory}/${num_wanted_file}", tofile:"${bin_dir}/${num_wanted_file}")
 	copy(file:"${context.serviceDirectory}/${check_num_wanted_script}", tofile:"${bin_dir}/${check_num_wanted_script}")
 	copy(file:"${context.serviceDirectory}/${set_num_wanted_script}", tofile:"${bin_dir}/${set_num_wanted_script}")
 	chmod(dir:"${bin_dir}", perm:"+x", includes:"*.sh")
