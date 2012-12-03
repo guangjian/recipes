@@ -70,8 +70,4 @@ service {
 		])
 	}
 	
-	network {
-		port currentPort
-		protocolDescription "HTTP"
-	}
 }
