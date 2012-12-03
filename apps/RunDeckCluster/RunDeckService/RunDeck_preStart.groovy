@@ -44,6 +44,13 @@ Builder.sequential {
 	//echo(message:"<node name=\"localhost\" description=\"Rundeck server node\" tags=\"\" hostname=\"localhost\" osArch=\"amd64\" osFamily=\"unix\" osName=\"Linux\" osVersion=\"2.6.32-279.2.1.el6.x86_64\" username=\"root\"/>\n", file:"${resources_file}", append:"true");
 }
 
+
+/*
+ * We used to initialize the resources.xml file with the set of remote nodes found but now we have each remote node check in when it is
+ * created.
+ * So now, we just end up with resources.xml with no nodes in it to start.
+ * TO DO: Allow this logic to run when the rundeck server is recreated so it can find the nodes and populate resources.xml.
+
 def remoteNodesService = context.waitForService("RunDeckRemoteNodes", 300, TimeUnit.SECONDS)
 remoteNodesHostInstances = remoteNodesService.waitForInstances(remoteNodesService.numberOfPlannedInstances, 300, TimeUnit.SECONDS)
 def remotenode_num = 1
@@ -56,6 +63,7 @@ for ( remotenodeinstance in remoteNodesHostInstances ) {
 	}
 	remotenode_num++
 }
+*/
 
 Builder.sequential {
 	echo(message:"</project>\n", file:"${resources_file}", append:"true");
