@@ -73,7 +73,10 @@ service {
 		])
 	}
 	
-	
+	context = ServiceContextFactory.getServiceContext()
+	def remoteNodesService = context.waitForService("RunDeckRemoteNodes", 300, TimeUnit.SECONDS)	
+	def num_actual_instances=remoteNodesService.numberOfActualInstances
+	println "Number of actual remotenodes deployes is: ${remoteNodesService."
 	// Once additional VMs have been added or removed (scaling has occured), the scaling rules will
 	// be disabled this number of seconds.
 	scaleCooldownInSeconds 20
@@ -89,13 +92,15 @@ service {
 			}
 
 			highThreshold {
-				value 200
-				instancesIncrease 1
+				value num_actual_instances
+				num_instances_to_increase=statistics.averageOfAverages - num_actual_instances
+				instancesIncrease num_instances_to_increase
 			}
 
 			lowThreshold {
-				value 10
-				instancesDecrease 1
+				value num_actual_instances
+				num_instances_to_decrease=num_actual_instances - statistics.averageOfAverages
+				instancesDecrease num_instances_to_decrease
 			}
 		}
 	])
