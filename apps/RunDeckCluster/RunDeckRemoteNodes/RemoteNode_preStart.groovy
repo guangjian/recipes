@@ -12,8 +12,8 @@ bin_dir="${config.bin_dir}"
 test_script="${config.test_script}"
 
 context = ServiceContextFactory.getServiceContext()
-//def remoteNodesService = context.waitForService("RunDeckRemoteNodes", 300, TimeUnit.SECONDS)
-//remoteNodesHostInstances = remoteNodesService.waitForInstances(remoteNodesService.numberOfPlannedInstances, 60, TimeUnit.SECONDS)
+def remoteNodesService = context.waitForService("RunDeckRemoteNodes", 300, TimeUnit.SECONDS)
+num_planned_instances=remoteNodesService.numberOfPlannedInstances
 
 // Set up and place the project.properties file used by RunDeck
 println "RemoteNode_preStart.groovy: Placing public SSH key file under ${remotenode_ssh_dir}"
@@ -36,4 +36,10 @@ Builder.sequential {
 	mkdir(dir:"${bin_dir}")
 	copy(file:"${context.serviceDirectory}/${test_script}", tofile:"${bin_dir}/${test_script}")
 	chmod(file:"${bin_dir}/${test_script}", perm:'755')
+}
+
+// Initialize the num_remotenodes_wanted.txt file
+Builder = new AntBuilder()
+Builder.sequential {
+	echo(message:"${num_planned_instances}", file:"/root/bin/num_remotenodes_wanted.txt", append:"false");
 }
