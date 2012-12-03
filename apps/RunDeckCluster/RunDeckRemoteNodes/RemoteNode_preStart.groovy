@@ -10,6 +10,9 @@ pub_ssh_key_file="${remotenode_ssh_dir}/${config.rundeck_public_ssh_key}"
 remotenode_authorized_keys_file="${config.remotenode_authorized_keys_file}"
 bin_dir="${config.bin_dir}"
 test_script="${config.test_script}"
+num_wanted_file="${config.num_wanted_file}"
+check_num_wanted_script="${config.check_num_wanted_script}"
+set_num_wanted_script="${config.set_num_wanted_script}"
 
 context = ServiceContextFactory.getServiceContext()
 def remoteNodesService = context.waitForService("RunDeckRemoteNodes", 300, TimeUnit.SECONDS)
@@ -38,8 +41,12 @@ Builder.sequential {
 	chmod(file:"${bin_dir}/${test_script}", perm:'755')
 }
 
-// Initialize the num_remotenodes_wanted.txt file
+// Place the remotenodes scaling scripts and initialize the num_remotenodes_wanted.txt file
 Builder = new AntBuilder()
 Builder.sequential {
 	echo(message:"${num_planned_instances}", file:"/root/bin/num_remotenodes_wanted.txt", append:"false");
+	copy(file:"${context.serviceDirectory}/${num_wanted_file}", tofile:"${bin_dir}/${num_wanted_file}")
+	copy(file:"${context.serviceDirectory}/${check_num_wanted_script}", tofile:"${bin_dir}/${check_num_wanted_script}")
+	copy(file:"${context.serviceDirectory}/${set_num_wanted_script}", tofile:"${bin_dir}/${set_num_wanted_script}")
+	chmod(dir:"${bin_dir}", perm:"+x", includes:"*.sh")
 }
