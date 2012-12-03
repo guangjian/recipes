@@ -76,7 +76,7 @@ service {
 	context = ServiceContextFactory.getServiceContext()
 	def remoteNodesService = context.waitForService("RunDeckRemoteNodes", 300, TimeUnit.SECONDS)	
 	def num_actual_instances=remoteNodesService.numberOfActualInstances
-	println "Number of actual remotenodes deployes is: ${remoteNodesService."
+	println "Number of actual remotenodes deployed is: ${remoteNodesService}."
 	// Once additional VMs have been added or removed (scaling has occured), the scaling rules will
 	// be disabled this number of seconds.
 	scaleCooldownInSeconds 20
