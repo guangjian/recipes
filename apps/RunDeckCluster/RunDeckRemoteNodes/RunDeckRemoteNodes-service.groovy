@@ -72,4 +72,31 @@ service {
 			},
 		])
 	}
+	
+	
+	// Once additional VMs have been added or removed (scaling has occured), the scaling rules will
+	// be disabled this number of seconds.
+	scaleCooldownInSeconds 20
+	samplingPeriodInSeconds 1
+
+
+	scalingRules ([
+		scalingRule {
+
+			serviceStatistics {
+				metric "Number of Remote Nodes Wanted"
+				movingTimeRangeInSeconds 10
+			}
+
+			highThreshold {
+				value 200
+				instancesIncrease 1
+			}
+
+			lowThreshold {
+				value 10
+				instancesDecrease 1
+			}
+		}
+	])
 }
