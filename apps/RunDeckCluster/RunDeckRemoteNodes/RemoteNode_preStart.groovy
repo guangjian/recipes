@@ -41,6 +41,7 @@ Builder.sequential {
 	chmod(file:"${bin_dir}/${test_script}", perm:'755')
 }
 
+/* No longer used
 // Place the remotenodes scaling scripts and initialize the num_remotenodes_wanted.txt file
 Builder = new AntBuilder()
 Builder.sequential {
@@ -49,3 +50,4 @@ Builder.sequential {
 	copy(file:"${context.serviceDirectory}/${set_num_wanted_script}", tofile:"${bin_dir}/${set_num_wanted_script}")
 	chmod(dir:"${bin_dir}", perm:"+x", includes:"*.sh")
 }
+*/
