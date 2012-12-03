@@ -20,9 +20,7 @@ resources_file="${project_dir}/etc/${config.rundeck_resources_xml}"
 // Add the new server into resources.xml
 Builder = new AntBuilder()
 Builder.sequential {
-	// First replace the last line of the resources.xml file with the new resource entry.
-	replaceregexp(file:"${resources_file}", match:"</project>", replace:"<node name=\"node-${remotenode_ip}\" description=\"node-${remotenode_ip}\" hostname=\"${remotenode_ip}\" username=\"root\"/>");
-	// Now add back in the </project> line which is needed at the end of the file.
-	echo(message:"</project>\n", file:"${resources_file}", append:"true");
+	// find the line with the vm IP in it and delete it
+	replaceregexp(file:"${resources_file}", match:".*${remotenode_ip}.*", replace:"", flags:"s");
 }
 

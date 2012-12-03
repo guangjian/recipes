@@ -57,12 +57,12 @@ service {
 
 	}
 
-	/*
+
 	customCommands ([
 		"addNode" : "RunDeck_addNode.groovy",
 		"removeNode" : "RunDeck_removeNode.groovy",
 	])
-	*/
+
 	
 	userInterface {
 		metricGroups = ([

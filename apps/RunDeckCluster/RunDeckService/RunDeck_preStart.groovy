@@ -52,7 +52,7 @@ for ( remotenodeinstance in remoteNodesHostInstances ) {
 	remotenode_ip="${remotenodeinstance.hostAddress}"
 	println "RundDeck_prestart.groovy: remotenode-${remotenode_num} has IP ${remotenode_ip}"
 	Builder.sequential {
-		echo(message:"<node name=\"remotenode-${remotenode_num}\" description=\"remotenode-${remotenode_num}\" tags=\"\" hostname=\"${remotenode_ip}\" osArch=\"amd64\" osFamily=\"unix\" osName=\"Linux\" osVersion=\"2.6.32-279.2.1.el6.x86_64\" username=\"root\"/>\n", file:"${resources_file}", append:"true");
+		echo(message:"<node name=\"node-${remotenode_ip}\" description=\"node-${remotenode_ip}\" hostname=\"${remotenode_ip}\" username=\"root\"/>\n", file:"${resources_file}", append:"true");
 	}
 	remotenode_num++
 }
