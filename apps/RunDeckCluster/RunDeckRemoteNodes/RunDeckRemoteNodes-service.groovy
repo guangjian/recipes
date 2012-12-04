@@ -26,10 +26,6 @@ service {
 	lifecycle {	
 	
 		preStart "RemoteNode_preStart.groovy"
-		
-		start {
-			
-		}
 			
 		startDetectionTimeoutSecs 800
 		startDetection {		
