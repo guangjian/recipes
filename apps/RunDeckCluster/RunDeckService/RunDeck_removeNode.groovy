@@ -10,7 +10,7 @@ import org.cloudifysource.dsl.context.ServiceContextFactory
 import java.util.concurrent.TimeUnit
 
 def remotenode_ip = args[0]
-
+println "RunDeckService_removeNode.groovy: Removing host with IP: ${remotenode_ip}"
 context = ServiceContextFactory.getServiceContext()
 
 config = new ConfigSlurper().parse(new File("RunDeck-service.properties").toURL())
@@ -21,6 +21,6 @@ resources_file="${project_dir}/etc/${config.rundeck_resources_xml}"
 Builder = new AntBuilder()
 Builder.sequential {
 	// find the line with the vm IP in it and delete it
-	replaceregexp(file:"${resources_file}", match:".*${remotenode_ip}.*", replace:"", flags:"s");
+	replaceregexp(file:"${resources_file}", match:"^<node.*${remotenode_ip}.*>$", replace:"", flags:"m");
 }
 
