@@ -1,3 +1,8 @@
+import java.util.concurrent.TimeUnit
+import org.cloudifysource.dsl.context.ServiceContextFactory
+import org.cloudifysource.dsl.utils.ServiceUtils;
+import org.hyperic.sigar.OperatingSystem
+
 /*
  * Version 1: Basic deployment. Cannot be scaled.
  * Version 2: Support manual scaling (i.e. via cloudify shell use set-instances RunDeckRemoteNodes X to set the number of instances wanted
