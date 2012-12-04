@@ -26,6 +26,10 @@ service {
 	lifecycle {	
 	
 		preStart "RemoteNode_preStart.groovy"
+		
+		start {
+			
+		}
 			
 		startDetectionTimeoutSecs 800
 		startDetection {		
@@ -36,15 +40,13 @@ service {
 			return []
         }	
 	
-		start {
-			def context = ServiceContextFactory.getServiceContext()
+		postStart {
 			def RunDeckService = context.waitForService("RunDeckService", 180, TimeUnit.SECONDS)
 			def hostAddress=System.getenv()["CLOUDIFY_AGENT_ENV_PRIVATE_IP"]
 			RunDeckService.invoke("addNode", "${hostAddress}" as String)
 		}
 		
-		stop {
-			def context = ServiceContextFactory.getServiceContext()
+		postStop {
 			def RunDeckService = context.waitForService("RunDeckService", 180, TimeUnit.SECONDS)
 			def hostAddress=System.getenv()["CLOUDIFY_AGENT_ENV_PRIVATE_IP"]
 			RunDeckService.invoke("removeNode", "${hostAddress}" as String)
