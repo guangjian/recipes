@@ -16,7 +16,7 @@ service {
 	elastic true
 	numInstances 2
 	minAllowedInstances 1
-	maxAllowedInstances 20
+	maxAllowedInstances 100
 
 	compute {
 		// Use template with root access - to make things easier
