@@ -10,6 +10,7 @@ pub_ssh_key_file="${remotenode_ssh_dir}/${config.rundeck_public_ssh_key}"
 remotenode_authorized_keys_file="${config.remotenode_authorized_keys_file}"
 bin_dir="${config.bin_dir}"
 test_script="${config.test_script}"
+dd_script="${config.dd_script}"
 num_wanted_file="${config.num_wanted_file}"
 check_num_wanted_script="${config.check_num_wanted_script}"
 set_num_wanted_script="${config.set_num_wanted_script}"
@@ -33,12 +34,13 @@ Builder.sequential {
 	chmod(file:"${remotenode_authorized_keys_file}", perm:'400')
 }
 
-// Drop in a test script for testing things out
+// Drop in a scripts for testing things out
 Builder = new AntBuilder()
 Builder.sequential {
 	mkdir(dir:"${bin_dir}")
 	copy(file:"${context.serviceDirectory}/${test_script}", tofile:"${bin_dir}/${test_script}")
-	chmod(file:"${bin_dir}/${test_script}", perm:'755')
+	copy(file:"${context.serviceDirectory}/${dd_script}", tofile:"${bin_dir}/$dd_script}")
+	chmod(dir:"${bin_dir}", perm:"+x", includes:"*.sh")
 }
 
 /* No longer used
