@@ -1,5 +1,4 @@
 #!/bin/sh
-
 echo "Using yum to install pre-reqs: php, httpd, curl, wget"
 yum install -y php* httpd *curl* wget nfs-utils
 
