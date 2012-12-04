@@ -21,6 +21,6 @@ resources_file="${project_dir}/etc/${config.rundeck_resources_xml}"
 Builder = new AntBuilder()
 Builder.sequential {
 	// find the line with the vm IP in it and delete it
-	replaceregexp(file:"${resources_file}", match:"^<node.*${remotenode_ip}.*>$", replace:"", flags:"m");
+	replaceregexp(file:"${resources_file}", match:".*${remotenode_ip}.*", replace:"");
 }
 
