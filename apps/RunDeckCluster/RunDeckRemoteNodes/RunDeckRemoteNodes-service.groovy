@@ -14,7 +14,7 @@ service {
 	type "APP_SERVER"
 
 	elastic true
-	numInstances 2
+	numInstances 1
 	minAllowedInstances 1
 	maxAllowedInstances 100
 

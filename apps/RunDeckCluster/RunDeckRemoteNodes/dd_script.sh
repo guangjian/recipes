@@ -1,22 +1,31 @@
 #!/bin/sh
 
-blocksize_list=4 8 32 128 256 512
+blocksize_list="4 8 32 128 256 512"
 outfile="/tmp/ofile"
-USAGE="usage: dd-test [-o <outfile>] [-b <blocksize>]\
--o: The outfile to which bytes should be written. File is deleted when done. If omitted, defaults to /tmp/ofile.\
--b: The blocksize in KB to use. If omitted the script will run the test will run the dd for the blocksizes: \[${blocksize_list}\]"
+
+
+usage ()
+{
+        echo "USAGE: $0 [-o <outfile>] [-b <blocksize>]"
+        echo "-o: The outfile to which bytes should be written."
+        echo "    File is deleted when done."
+        echo "    If omitted, defaults to /tmp/ofile."
+        echo "-b: The blocksize in KB to use."
+        echo "     If omitted the script will run the dd for the blocksizes:"
+        echo "     [${blocksize_list}]"
+}
 
 while getopts o:b: param
 do
-	case "${param}" in
-		b)	blocksize_list="${OPTARG}"
-			;;
-		o)	outfile="${OPTARG}"
-			;;
-		*)	echo ${USAGE}
-			exit 1
-			;;
-	esac
+        case "${param}" in
+                b)      blocksize_list="${OPTARG}"
+                        ;;
+                o)      outfile="${OPTARG}"
+                        ;;
+                *)      usage
+                        exit 1
+                        ;;
+        esac
 done
 
 
@@ -32,9 +41,9 @@ MULT=2
 #
 for bs in ${blocksize_list}
 do
-	count=$(echo ${MEM}*${MULT}/${bs} | bc)
+	((count=MEM*MULT/bs))
 	cmd="dd if=/dev/urandom of=${outfile} iflag=fullblock oflag=direct bs=${bs}K count=${count}"
 	echo "cmd: ${cmd}"
 	eval "${cmd}"
-    rm $1
+    rm ${outfile}
 done
