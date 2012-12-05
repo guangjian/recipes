@@ -23,8 +23,9 @@ MULT=2
 #
 for bs in 4 8 32 128 256 512
 do
-      count=$(echo ${MEM}*${MULT}/${bs} | bc)
-      cmd="dd if=/dev/urandom of=$1 iflag=fullblock oflag=direct bs=${bs}K count=${count}"
-      echo "cmd: ${cmd}"
-      eval "${cmd}"
+	count=$(echo ${MEM}*${MULT}/${bs} | bc)
+	cmd="dd if=/dev/urandom of=$1 iflag=fullblock oflag=direct bs=${bs}K count=${count}"
+	echo "cmd: ${cmd}"
+	eval "${cmd}"
+    rm $1
 done
