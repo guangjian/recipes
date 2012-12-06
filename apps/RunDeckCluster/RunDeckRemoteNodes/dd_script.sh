@@ -14,8 +14,8 @@ usage ()
         echo "    If omitted, the script will run the dd for the blocksizes:"
         echo "    [${blocksize_list}]"
         echo "-d: The /dev/<device> to use for the dd operation."
-        echo:"    E.g. zero for /dev/zero or urandom for /dev/urandom"
-        echo:"    If omitted, the script will run with /dev/urandom."
+        echo "    E.g. zero for /dev/zero or urandom for /dev/urandom"
+        echo "    If omitted, the script will run with /dev/urandom."
 }
 
 while getopts o:b: param
