@@ -18,7 +18,7 @@ usage ()
         echo "    If omitted, the script will run with /dev/urandom."
 }
 
-while getopts o:b: param
+while getopts o:b:d: param
 do
         case "${param}" in
                 b)      blocksize_list="${OPTARG}"
