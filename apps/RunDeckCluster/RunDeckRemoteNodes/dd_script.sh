@@ -2,17 +2,20 @@
 
 blocksize_list="4 8 32 128 256 512"
 outfile="/tmp/ofile"
-
+device="urandom"
 
 usage ()
 {
-        echo "USAGE: $0 [-o <outfile>] [-b <blocksize>]"
+        echo "USAGE: $0 [-o <outfile>] [-b <blocksize>] [-d <device>]"
         echo "-o: The outfile to which bytes should be written."
         echo "    File is deleted when done."
         echo "    If omitted, defaults to /tmp/ofile."
         echo "-b: The blocksize in KB to use."
-        echo "     If omitted the script will run the dd for the blocksizes:"
-        echo "     [${blocksize_list}]"
+        echo "    If omitted, the script will run the dd for the blocksizes:"
+        echo "    [${blocksize_list}]"
+        echo "-d: The /dev/<device> to use for the dd operation."
+        echo:"    E.g. zero for /dev/zero or urandom for /dev/urandom"
+        echo:"    If omitted, the script will run with /dev/urandom."
 }
 
 while getopts o:b: param
@@ -22,6 +25,8 @@ do
                         ;;
                 o)      outfile="${OPTARG}"
                         ;;
+                d)		device="${OPTARG}"
+                		;;
                 *)      usage
                         exit 1
                         ;;
@@ -42,7 +47,7 @@ MULT=2
 for bs in ${blocksize_list}
 do
 	((count=MEM*MULT/bs))
-	cmd="dd if=/dev/urandom of=${outfile} iflag=fullblock oflag=direct bs=${bs}K count=${count}"
+	cmd="dd if=/dev/${device} of=${outfile} iflag=fullblock oflag=direct bs=${bs}K count=${count}"
 	echo "cmd: ${cmd}"
 	eval "${cmd}"
     rm ${outfile}
