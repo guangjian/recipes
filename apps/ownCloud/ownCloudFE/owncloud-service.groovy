@@ -5,23 +5,23 @@ service {
 	type "WEB_SERVER"
 	
   elastic false
-	numInstances 1
-	minAllowedInstances 1
-	maxAllowedInstances 2
+	numInstances 2
+	minAllowedInstances 2
+	maxAllowedInstances 4
 	
 	compute {
-		template "BIG_MEDIUM"
+		template "QUAD_ROOT_ACCESS"
 	}
 
 	lifecycle {
 		install "install.sh"
 		start "owncloud_start.groovy"
-
+		preStop "owncloud_stop.groovy"
+		
 		locator {
 			return [] as LinkedList
 			}
-
-
+			
 		}
 
 

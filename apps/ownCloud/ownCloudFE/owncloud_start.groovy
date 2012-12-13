@@ -7,7 +7,17 @@ import java.util.concurrent.TimeUnit
 
 context = ServiceContextFactory.getServiceContext()
 
-hostIp=InetAddress.localHost.hostAddress
+def hostIp
+
+if (  context.isLocalCloud()  ) {
+	hostIp = InetAddress.getLocalHost().getHostAddress()
+}
+else {
+	hostIp = System.getenv()["CLOUDIFY_AGENT_ENV_PRIVATE_IP"]
+}
+
+// hostIp=InetAddress.localHost.hostAddress
+
 println "HostIP is: $hostIp"
 
 def mysqlService = context.waitForService("mysql", 300, TimeUnit.SECONDS)
@@ -30,6 +40,17 @@ if (nfsServerIP == null) {
 
 println "Retrieving nfsServerIP: $nfsServerIP"
 
+def ctxPath=("default" == context.applicationName)?"":"${context.applicationName}"
+println "Setting ctxPath: $ctxPath"
+
+def instanceID = context.instanceId
+println "Setting instanceID: $ctxPath"
+
+def haService = context.waitForService("HAproxy", 180, TimeUnit.SECONDS)
+println "Invoking addNode, http://${hostIp}:80/${ctxPath}"
+haService.invoke("addNode", "${hostIp}" as String)
+println "AddNode complete"
+			
 Builder = new AntBuilder()
 
 println "Start: copy config and execute start.sh"
@@ -43,5 +64,4 @@ Builder.sequential {
 			arg value:"$nfsServerIP"
 			}
 println "Finished attempting to copy config and execute start.sh"
-
 }

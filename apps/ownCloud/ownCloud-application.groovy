@@ -11,7 +11,11 @@ application {
 	}
 
 	service {
+		name = "HAproxy"
+	}
+
+	service {
 		name = "ownCloudFE"
-			dependsOn = ["mysql", "nfsServer" ]
+			dependsOn = ["mysql", "nfsServer", "HAproxy" ]
 	}
 }
