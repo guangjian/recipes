@@ -1,5 +1,6 @@
 import org.hyperic.sigar.OperatingSystem
 import org.cloudifysource.usm.USMUtils
+import org.cloudifysource.dsl.utils.ServiceUtils;
 import java.util.concurrent.TimeUnit
 import org.cloudifysource.dsl.context.ServiceContextFactory
 
@@ -7,7 +8,7 @@ println "###### > Installing Ulteo Session Application"
 
 config = new ConfigSlurper().parse(new File("ulteoApplication.properties").toURL())
 context = ServiceContextFactory.getServiceContext()
-osConfig = USMUtils.isWindows() ? config.win32 : config.linux
+osConfig = ServiceUtils.isWindows() ? config.win32 : config.linux
 
 def ulteoManagerService = context.waitForService("ulteoManagerService", 180, TimeUnit.SECONDS)
 sessionManagerInstances = ulteoManagerService.waitForInstances(ulteoManagerService.numberOfPlannedInstances, 60, TimeUnit.SECONDS)

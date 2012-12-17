@@ -1,12 +1,13 @@
 import org.hyperic.sigar.OperatingSystem
 import org.cloudifysource.usm.USMUtils
+import org.cloudifysource.dsl.utils.ServiceUtils;
 import org.cloudifysource.dsl.context.ServiceContextFactory
 
 println "###### > Installing Ulteo Session Manager"
 
 config = new ConfigSlurper().parse(new File("ulteoManager.properties").toURL())
 context = ServiceContextFactory.getServiceContext()
-osConfig = USMUtils.isWindows() ? config.win32 : config.linux
+osConfig = ServiceUtils.isWindows() ? config.win32 : config.linux
 
 use_preconfigured=config.using_preconfigured_managerVMtemplate
 
