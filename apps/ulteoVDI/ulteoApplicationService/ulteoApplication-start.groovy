@@ -9,16 +9,7 @@ context = ServiceContextFactory.getServiceContext()
 def os = OperatingSystem.getInstance()
 def currVendor=os.getVendor()
 def startScript
-
-switch (currVendor) {
-	case ["Ubuntu", "Debian", "Mint"]:
-		startScript="${context.serviceDirectory}/runOnUbuntu.sh"
-		break
-	case ["Red Hat", "CentOS", "Fedora", "Amazon",""]:
-		startScript="${context.serviceDirectory}/run.sh"
-		break
-	default: throw new Exception("Support for ${currVendor} is not implemented")
-}
+startScript="${context.serviceDirectory}/run.sh"
 
 println "###### > Wait for Manager to be available"
 

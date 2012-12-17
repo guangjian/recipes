@@ -31,23 +31,10 @@ if ( use_preconfigured ) {
 	
 	println "the Directory is >>  ${context.serviceDirectory}"
 	
-	switch (currVendor) {
-		case ["Ubuntu", "Debian", "Mint"]:
-			builder.sequential {
-				echo(message:"Running ${context.serviceDirectory}/installOnUbuntu.sh os is ${currVendor}...")
-				exec(executable: "${context.serviceDirectory}/installOnUbuntu.sh",osfamily:"unix", failonerror: "true")
-			}
-			break
-	
-		case ["Red Hat", "CentOS", "Fedora", "Amazon",""]:
-			builder.sequential {
-				echo(message:"Running ${context.serviceDirectory}/installOnLinux.sh os is ${currVendor}...")
-				exec(executable: "${context.serviceDirectory}/installOnLinux.sh", osfamily:"unix", failonerror: "true")
-			}
-	
-			break
-		default: throw new Exception("Support for ${currVendor} is not implemented")
+	builder.sequential {
+		echo(message:"Running ${context.serviceDirectory}/installOnLinux.sh os is ${currVendor}...")
+		exec(executable: "${context.serviceDirectory}/installOnLinux.sh", osfamily:"unix", failonerror: "true")
 	}
+
 }
 
-// or just use the template as-is

@@ -18,29 +18,15 @@ currVendor = os.getVendor()
 
 managerIP=sessionManagerInstances[0].hostAddress
 
-switch (currVendor) {
-	case ["Ubuntu", "Debian", "Mint"]:
-		builder.sequential {
-			chmod(dir:"${context.serviceDirectory}", perm:"+x", includes:"*.sh")
-			echo(message:"Running ${context.serviceDirectory}/installOnUbuntu.sh os is ${currVendor}...")
-			exec(executable: "${context.serviceDirectory}/installOnUbuntu.sh", osfamily:"unix", failonerror: "true" ) {
-											arg value: "${managerIP}"
-											}
-		}
-		break
-
-	case ["Red Hat", "CentOS", "Fedora", "Amazon",""]:
-		builder.sequential {
-			chmod(dir:"${context.serviceDirectory}", perm:"+x", includes:"*.sh")
-			echo(message:"Running ${context.serviceDirectory}/installOnLinux.sh os is ${currVendor}...")
-			exec(executable: "${context.serviceDirectory}/installOnLinux.sh", osfamily:"unix", failonerror: "true" ) {
-											arg value: "${managerIP}"
-											}
-		}
-
-		break
-	default: throw new Exception("Support for ${currVendor} is not implemented")
+builder.sequential {
+	chmod(dir:"${context.serviceDirectory}", perm:"+x", includes:"*.sh")
+	echo(message:"Running ${context.serviceDirectory}/installOnLinux.sh os is ${currVendor}...")
+	exec(executable: "${context.serviceDirectory}/installOnLinux.sh", osfamily:"unix", failonerror: "true" ) {
+		arg value: "${managerIP}"
+	}
 }
+
+
 
 // Place the  scripts in place
 println("Moving shell scripts to their proper home")
