@@ -15,6 +15,7 @@ service {
 
 	lifecycle {
 		install "install.sh"
+		postInstall "ownCloudFE_postInstall.groovy"
 		start "owncloud_start.groovy"
 		preStop "owncloud_stop.groovy"
 		
