@@ -4,7 +4,6 @@
  * 		arg[0] = IP address of remotenode VM. (The remotenode service will pass the VM's IP address when invoking the method.)
  */
 
-import org.hyperic.sigar.OperatingSystem
 import org.cloudifysource.usm.USMUtils
 import org.cloudifysource.dsl.context.ServiceContextFactory
 import java.util.concurrent.TimeUnit

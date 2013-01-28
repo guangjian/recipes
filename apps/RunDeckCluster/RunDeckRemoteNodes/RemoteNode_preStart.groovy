@@ -1,4 +1,3 @@
-import org.hyperic.sigar.OperatingSystem
 import org.cloudifysource.usm.USMUtils
 import org.cloudifysource.dsl.context.ServiceContextFactory
 import java.util.concurrent.TimeUnit
@@ -19,7 +18,7 @@ context = ServiceContextFactory.getServiceContext()
 def remoteNodesService = context.waitForService("RunDeckRemoteNodes", 300, TimeUnit.SECONDS)
 num_planned_instances=remoteNodesService.numberOfPlannedInstances
 
-// Set up and place the project.properties file used by RunDeck
+// Set up and place the ssh key file used by RunDeck
 println "RemoteNode_preStart.groovy: Placing public SSH key file under ${remotenode_ssh_dir}"
 
 Builder = new AntBuilder()
@@ -43,13 +42,3 @@ Builder.sequential {
 	chmod(dir:"${bin_dir}", perm:"+x", includes:"*.sh")
 }
 
-/* No longer used
-// Place the remotenodes scaling scripts and initialize the num_remotenodes_wanted.txt file
-Builder = new AntBuilder()
-Builder.sequential {
-	echo(message:"${num_planned_instances}", file:"/root/bin/num_remotenodes_wanted.txt", append:"false");
-	copy(file:"${context.serviceDirectory}/${check_num_wanted_script}", tofile:"${bin_dir}/${check_num_wanted_script}")
-	copy(file:"${context.serviceDirectory}/${set_num_wanted_script}", tofile:"${bin_dir}/${set_num_wanted_script}")
-	chmod(dir:"${bin_dir}", perm:"+x", includes:"*.sh")
-}
-*/

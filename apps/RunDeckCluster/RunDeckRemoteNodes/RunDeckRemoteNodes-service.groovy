@@ -1,7 +1,6 @@
 import java.util.concurrent.TimeUnit
 import org.cloudifysource.dsl.context.ServiceContextFactory
 import org.cloudifysource.dsl.utils.ServiceUtils;
-import org.hyperic.sigar.OperatingSystem
 
 /*
  * Version 1: Basic deployment. Cannot be scaled.
@@ -14,13 +13,13 @@ service {
 	type "APP_SERVER"
 
 	elastic true
-	numInstances 4
+	numInstances "${Number_of_RemoteNodes}"
 	minAllowedInstances 1
 	maxAllowedInstances 100
 
 	compute {
 		// Use template with root access - to make things easier
-		template "RunDeckRemoteNodeTemplate"
+		template "tmpl_20130117_1"
 	}
 
 	lifecycle {	

@@ -8,7 +8,7 @@ service {
 
 	compute {
 		// Use template with root access - to make things easier
-		template "RunDeckServiceTemplate"
+		template "tmpl_20130117_1"
 	}
 
 	lifecycle {
@@ -41,13 +41,7 @@ service {
 		startDetectionTimeoutSecs 800
 		startDetection {			
 			ServiceUtils.isPortOccupied(currentPort)
-		}	
-		
-//		preStop ([	
-//			"Win.*":"killAllHttpd.bat",		
-//			"Linux.*":"RunDeck_stop.groovy"
-//			])
-		
+		}			
 			
 		locator {			
 			def myPids = ServiceUtils.ProcessUtils.getPidsWithQuery("State.Name.re=rundeck")
