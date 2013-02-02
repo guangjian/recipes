@@ -16,15 +16,8 @@ builder = new AntBuilder()
 
 builder.sequential {
 
-	echo(message:"webService_postStart.groovy: Copying the /var/www/html files.")
+	echo(message:"webService_start.groovy: creating index.html file.")
 	
-	copy(todir:"${webServerDirectory}/${webServerHtml}") {
-		fileset(dir:"${context.serviceDirectory}", includes: "*.html *.css *.png")
-	}
-	
-	echo(message:"presenceService_postStart.groovy: Substituting greeting text in index.html file")
-	replaceregexp(file:"${webServerDirectory}/${webServerHtml}/index.html",
-		match:"Hola Mundo",
-		replace:"${greetingText}")
+	echo(message:"${greetingText}", file:"${webServerDirectory}/${webServerHtml}/index.html")
 
 }
