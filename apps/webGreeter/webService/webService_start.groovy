@@ -6,7 +6,7 @@ import org.cloudifysource.dsl.context.ServiceContextFactory
 context = ServiceContextFactory.getServiceContext()
 config = new ConfigSlurper().parse(new File("webService-service.properties").toURL())
 
-greetingText=config.greetingText
+greetingText=config.WebPageGreeting
 
 webServerDirectory=config.webServerDirectory
 webServerCgibin=config.webServerCgibin
