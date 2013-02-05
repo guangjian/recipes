@@ -19,5 +19,10 @@ builder.sequential {
 	echo(message:"webService_start.groovy: creating index.html file.")
 	
 	echo(message:"${greetingText}", file:"${webServerDirectory}/${webServerHtml}/index.html")
+	
+	exec(executable: 'service', osfamily:"unix") {
+							 arg value:"httpd"
+							 arg value:"restart"
+	}
 
 }

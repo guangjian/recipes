@@ -8,7 +8,7 @@ service {
 	numInstances 1	
 	
 	compute {
-		template "tmpl_20130117_1"
+		template "tmpl_webGreeter"
 	}	
 	
 	lifecycle{
