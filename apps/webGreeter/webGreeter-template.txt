@@ -1,5 +1,5 @@
 [
-	tmpl_20130117_1 : template {
+	webService_template : template {
 		imageId "-1"   //resolved at runtime                           
 		machineMemoryMB 2000
 		hardwareId "Dual"

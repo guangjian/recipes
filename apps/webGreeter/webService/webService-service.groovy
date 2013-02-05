@@ -8,7 +8,7 @@ service {
 	numInstances 1	
 	
 	compute {
-		template "tmpl_webGreeter"
+		template "webService_template"
 	}	
 	
 	lifecycle{
