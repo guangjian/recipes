@@ -21,7 +21,7 @@
 			"cloudband.image.osBits" : "64",
 			"cloudband.image.osVersion" : "6.3",
 			"cloudband.image.hypervisor": "KVM",   
-			"cloudband.image.url": "http://TBD",
+			"cloudband.image.url": "http://dcb-1-images.cic.cloud-band.com/images/paas/templates/tmpl_c63_130205_1.qcow2",
 
 			//SecurityGroup
 			"cloudband.securityGroup.name": "CLOUDIFY_ALLOW_ALL",
