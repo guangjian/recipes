@@ -11,7 +11,7 @@ service {
 	
 	// See wiki for template inventory and description.
 	compute {
-		template "tmpl_20130121c5_4"
+		template "ownCloudSA_template"
 	}
 
 	lifecycle {

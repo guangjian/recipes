@@ -11,7 +11,7 @@ service {
 	numInstances 1	
 	
 	compute {
-		template "tmpl_20130121c5_4"
+		template "ownCloudSA_template"
 	}	
 	
 	lifecycle{
