@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+	<tiersProperties>
+		<property>
+			<tierName>presenceService</tierName>
+			<name>vSphereServer</name>
+			<type>String</type>
+			<defaultValue>10.42.6.240</defaultValue>
+			<description>vSphereServer</description>
+		</property>
+		<property>
+			<tierName>presenceService</tierName>
+			<name>vSphereUser</name>
+			<type>String</type>
+			<defaultValue>VMwareServiceAccount</defaultValue>
+			<description>vSphereUser</description>
+		</property>
+		<property>
+			<tierName>presenceService</tierName>
+			<name>vSpherePassword</name>
+			<type>String</type>
+			<defaultValue>N1Sh1W5DeWeiEN0t</defaultValue>
+			<description>vSpherePassword</description>
+		</property>
+		<property>
+			<tierName>presenceService</tierName>
+			<name>vSphereVmId</name>
+			<type>String</type>
+			<defaultValue>i-2-83-VM</defaultValue>
+			<description>vSphereVmId</description>
+		</property>		
+	</tiersProperties>
+</application>
