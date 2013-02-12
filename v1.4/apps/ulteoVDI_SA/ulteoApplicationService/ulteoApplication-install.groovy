@@ -6,10 +6,13 @@ import org.cloudifysource.dsl.context.ServiceContextFactory
 println "###### > Installing Ulteo Session Application"
 
 config = new ConfigSlurper().parse(new File("ulteoApplication.properties").toURL())
-context = ServiceContextFactory.getServiceContext()
+def context = ServiceContextFactory.getServiceContext()
 
 def ulteoManagerService = context.waitForService("ulteoManagerService", 180, TimeUnit.SECONDS)
 sessionManagerInstances = ulteoManagerService.waitForInstances(ulteoManagerService.numberOfPlannedInstances, 60, TimeUnit.SECONDS)
+
+// Get the IP of the session manager which the manager stored earlier.
+managerIP=context.attributes.thisApplication["sessionManagerIP"]
 
 builder = new AntBuilder()
 
