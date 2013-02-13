@@ -28,6 +28,13 @@
 			<type>String</type>
 			<defaultValue>i-2-83-VM</defaultValue>
 			<description>vSphereVmId</description>
+		</property>	
+		<property>
+			<tierName>presenceService</tierName>
+			<name>suspendPresenceOnStop</name>
+			<type>Boolean</type>
+			<defaultValue>false</defaultValue>
+			<description>Whether or not presence should be suspended when application is stopped.</description>
 		</property>		
 	</tiersProperties>
 </application>
