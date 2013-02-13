@@ -16,8 +16,6 @@ managerIP=context.attributes.thisApplication["sessionManagerIP"]
 
 builder = new AntBuilder()
 
-managerIP=sessionManagerInstances[0].hostAddress
-
 builder.sequential {
 	chmod(dir:"${context.serviceDirectory}", perm:"+x", includes:"*.sh")
 	echo(message:"Running ${context.serviceDirectory}/installOnLinux.sh ...")
