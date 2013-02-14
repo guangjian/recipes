@@ -13,7 +13,7 @@ vSpherePassword=config.vSpherePassword
 vSphereVmId=config.vSphereVmId
 suspendPresenceOnStop=config.suspendPresenceOnStop
 
-if ( suspendPresenceOnStop ) {
+if ( "${suspendPresenceOnStop}" == "true" ) {
 
 	builder = new AntBuilder()
 	
