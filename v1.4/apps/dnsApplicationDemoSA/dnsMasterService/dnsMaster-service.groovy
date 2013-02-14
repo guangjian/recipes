@@ -35,14 +35,45 @@ service {
 		
 		postStart {
 			def dnsLoadGeneratorService = context.waitForService("dnsLoadGeneratorService", 180, TimeUnit.SECONDS)
-			def hostAddress=System.getenv()["CLOUDIFY_AGENT_ENV_PRIVATE_IP"]
-			// just a filler
+			
+			// Assumes the default network IP is on eth0.
+			// A possibly dangerous assumption but no other way to determine the IP to use.
+			// Optimally, the default networking information would be passed by cloudband to the recipe in some way.
+			// Then intelligent choices could be made based on that info.
+			NetworkInterface ni = NetworkInterface.getByName("eth0");
+			Enumeration<InetAddress> inetAddresses =  ni.getInetAddresses();
+			def hostAddress
+			while(inetAddresses.hasMoreElements()) {
+				InetAddress ia = inetAddresses.nextElement();
+				if(!ia.isLinkLocalAddress()) {
+					ipAddr=ia.getHostAddress();
+					println("Found sessionManager IP: " + ipAddr);
+					hostAddress = ipAddr;
+				}
+			}
+			
 			dnsLoadGeneratorService.invoke("addNode", "Master:${hostAddress}" as String, "SHOULDNOTSEETHIS" as String)
 		}
 		
 		postStop {
 			def dnsLoadGeneratorService = context.waitForService("dnsLoadGeneratorService", 180, TimeUnit.SECONDS)
-			def hostAddress=System.getenv()["CLOUDIFY_AGENT_ENV_PRIVATE_IP"]
+			
+			// Assumes the default network IP is on eth0.
+			// A possibly dangerous assumption but no other way to determine the IP to use.
+			// Optimally, the default networking information would be passed by cloudband to the recipe in some way.
+			// Then intelligent choices could be made based on that info.
+			NetworkInterface ni = NetworkInterface.getByName("eth0");
+			Enumeration<InetAddress> inetAddresses =  ni.getInetAddresses();
+			def hostAddress
+			while(inetAddresses.hasMoreElements()) {
+				InetAddress ia = inetAddresses.nextElement();
+				if(!ia.isLinkLocalAddress()) {
+					ipAddr=ia.getHostAddress();
+					println("Found sessionManager IP: " + ipAddr);
+					hostAddress = ipAddr;
+				}
+			}			
+			
 			dnsLoadGeneratorService.invoke("removeNode", "Master:${hostAddress}" as String)
 		}
 		
