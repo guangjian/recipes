@@ -2,7 +2,7 @@
 	ulteoApplicationService_template : template {
 		imageId "-1"   //resolved at runtime                           
 		machineMemoryMB 2000
-		hardwareId "Quad"
+		hardwareId "Dual"
 		localDirectory "upload"
 		remoteDirectory "/usr/gs-files"
 		username "root"

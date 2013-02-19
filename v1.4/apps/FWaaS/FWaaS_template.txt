@@ -1,12 +1,12 @@
 [
-	dnsAppDemoSA_template : template {
+	FWaaS_template : template {
 		imageId "-1"   //resolved at runtime                           
 		machineMemoryMB 2000
 		hardwareId "Dual"
 		localDirectory "upload"
 		remoteDirectory "/usr/gs-files"
-		username "root"
-		password "tmpl_c63_130205_2"
+		username "vyatta"
+		password "vyatta"
 
 		options ([    
 			//Deployment          
@@ -14,13 +14,13 @@
 			"cloudband.deployment.description" : "Cloudify CloudBand Services",                                    
 			
 			//Image
-			"cloudband.image.name" : "tmpl_c63_130205_2",
-			"cloudband.image.description" : "CentOS 6 Base template",
+			"cloudband.image.name" : "tmpl_vyatta_3nic_1",
+			"cloudband.image.description" : "Licensed Vyatta Server base image",
 			"cloudband.image.osType" : "CENTOS",
 			"cloudband.image.osBits" : "64",
-			"cloudband.image.osVersion" : "6.3",
+			"cloudband.image.osVersion" : "5.5",
 			"cloudband.image.hypervisor": "KVM",   
-			"cloudband.image.url": "http://dcb-1-images.cic.cloud-band.com/images/paas/templates/tmpl_c63_130205_2.qcow2",
+			"cloudband.image.url": "http://tbd/vyatta-1.cow2",
 
 			//SecurityGroup
 			"cloudband.securityGroup.name": "CLOUDIFY_ALLOW_ALL",
