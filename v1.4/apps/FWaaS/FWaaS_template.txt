@@ -4,9 +4,14 @@
 		machineMemoryMB 2000
 		hardwareId "Dual"
 		localDirectory "upload"
-		remoteDirectory "/usr/gs-files"
+		remoteDirectory "/home/vyatta/gs-files"
 		username "vyatta"
 		password "vyatta"
+		
+		
+		env  ([	"GIGASPACES_AGENT_ENV_PRIVILEGED" :  "true",
+		])
+		
 
 		options ([    
 			//Deployment          
