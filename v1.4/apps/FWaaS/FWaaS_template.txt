@@ -8,8 +8,11 @@
 		username "vyatta"
 		password "vyatta"
 		
-		
+		// Set parameters so cloudify knows to use sudo and to not install java.
+		// This latter bit about java is because it insists on installing java in /usr without sudo and so it fails.
+		// Therefore, the image file being used already has java installed under /usr/java and JAVA_HOME pointing there.
 		env  ([	"GIGASPACES_AGENT_ENV_PRIVILEGED" :  "true",
+				"GIGASPACES_AGENT_ENV_JAVA_URL" : "NO_INSTALL",
 		])
 		
 
@@ -19,7 +22,7 @@
 			"cloudband.deployment.description" : "Cloudify CloudBand Services",                                    
 			
 			//Image
-			"cloudband.image.name" : "tmpl_vyatta_3nic_1",
+			"cloudband.image.name" : "tmpl_vyatta_3nic_v2",
 			"cloudband.image.description" : "Licensed Vyatta Server base image",
 			"cloudband.image.osType" : "CENTOS",
 			"cloudband.image.osBits" : "64",
